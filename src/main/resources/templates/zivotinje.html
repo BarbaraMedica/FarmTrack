@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1>Životinje</h1>
+
+<a href="/zivotinje/nova">Dodaj životinju</a>
+
+<form action="/zivotinje">
+  <input name="search" placeholder="Pretraži po imenu">
+  <button>Traži</button>
+</form>
+
+<table>
+  <tr>
+    <th>Ime</th>
+    <th>Markica</th>
+    <th>Pasmina</th>
+    <th>Zabilježeno</th>
+  </tr>
+
+  <tr th:each="z : ${zivotinje}">
+    <td th:text="${z.ime}"></td>
+    <td th:text="${z.brojMarkice}"></td>
+    <td th:text="${z.pasmina}"></td>
+    <td>
+      <a th:href="@{'/zivotinje/' + ${z.id}}">Detalji</a>
+      <a th:href="@{'/zivotinje/uredi/' + ${z.id}}">Uredi</a>
+      <a th:href="@{'/zivotinje/obrisi/' + ${z.id}}">Obriši</a>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,13 +1,13 @@
-package controller;
+package hr.example.farmtrack.controller;
 
-import entity.Animal;
+import hr.example.farmtrack.entity.Animal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
-import repository.AnimalRepository;
+import hr.example.farmtrack.repository.AnimalRepository;
 
 @Controller
 @RequestMapping("/zivotinje")

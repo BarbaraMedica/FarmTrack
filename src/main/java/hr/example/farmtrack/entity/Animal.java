@@ -1,4 +1,4 @@
-package entity;
+package hr.example.farmtrack.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

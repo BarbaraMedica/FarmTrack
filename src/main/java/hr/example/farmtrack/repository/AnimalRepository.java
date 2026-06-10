@@ -1,6 +1,6 @@
-package repository;
+package hr.example.farmtrack.repository;
 
-import entity.Animal;
+import hr.example.farmtrack.entity.Animal;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

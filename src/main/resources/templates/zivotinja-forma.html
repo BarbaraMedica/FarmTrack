@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Životinja</h1>
+
+<form action="/zivotinje/spremi" method="post" th:object="${zivotinja}">
+
+    <input th:field="*{ime}" placeholder="Ime životinje">
+    <input th:field="*{brojMarkice}" placeholder="Broj markice">
+    <input th:field="*{pasmina}" placeholder="Pasmina">
+    <input th:field="*{status}" placeholder="Status">
+
+    <button>Spremi</button>
+</form>
+</body>
+</html>
