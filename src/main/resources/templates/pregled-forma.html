@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Novi pregled</title>
+</head>
+<body>
+
+<h1>Novi pregled</h1>
+
+<form th:action="@{/pregledi/spremi}"
+      th:object="${pregled}"
+      method="post">
+
+    <input type="hidden"
+           th:field="*{animal.id}">
+
+    <div>
+        <label>Datum pregleda:</label>
+        <input type="date"
+               th:field="*{datumPregleda}">
+    </div>
+
+    <div>
+        <label>Terapija:</label>
+        <input type="text"
+               th:field="*{terapija}">
+    </div>
+
+    <div>
+        <label>Količina mlijeka:</label>
+        <input type="number"
+               step="0.1"
+               th:field="*{kolicinaMlijeka}">
+    </div>
+
+    <div>
+        <label>Bilješke:</label>
+        <textarea th:field="*{biljeske}">
+        </textarea>
+    </div>
+
+    <button type="submit">
+        Spremi pregled
+    </button>
+
+</form>
+
+</body>
+</html>

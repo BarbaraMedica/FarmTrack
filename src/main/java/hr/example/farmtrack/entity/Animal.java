@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "zivotinje")
@@ -27,10 +28,18 @@ public class Animal {
 
     private String status;
 
+    @OneToMany(mappedBy = "animal",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<MedicalRecord> medicinskiZapisi;
     // GET / SET
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getBrojMarkice() {
@@ -80,4 +89,13 @@ public class Animal {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public List<MedicalRecord> getMedicinskiZapisi() {
+        return medicinskiZapisi;
+    }
+
+    public void setMedicinskiZapisi(List<MedicalRecord> medicinskiZapisi) {
+        this.medicinskiZapisi = medicinskiZapisi;
+    }
+
 }

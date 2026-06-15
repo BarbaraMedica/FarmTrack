@@ -9,5 +9,25 @@
 <p>Markica: <span th:text="${zivotinja.brojMarkice}"></span></p>
 <p>Pasmina: <span th:text="${zivotinja.pasmina}"></span></p>
 <p>Status: <span th:text="${zivotinja.status}"></span></p>
+<a th:href="@{/pregledi/novi/{id}(id=${zivotinja.id})}">
+    Dodaj pregled
+</a>
+<h2>Medicinski zapisi</h2>
+
+<table border="1">
+    <tr>
+        <th>Datum</th>
+        <th>Terapija</th>
+        <th>Mlijeko</th>
+        <th>Bilješke</th>
+    </tr>
+
+    <tr th:each="m : ${zivotinja.medicinskiZapisi}">
+        <td th:text="${m.datumPregleda}"></td>
+        <td th:text="${m.terapija}"></td>
+        <td th:text="${m.kolicinaMlijeka}"></td>
+        <td th:text="${m.biljeske}"></td>
+    </tr>
+</table>
 </body>
 </html>
