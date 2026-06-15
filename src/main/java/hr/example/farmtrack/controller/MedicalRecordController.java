@@ -15,25 +15,23 @@ public class MedicalRecordController {
     private final MedicalRecordRepository medicalRecordRepository;
     private final AnimalRepository animalRepository;
 
-    public MedicalRecordController(
-            MedicalRecordRepository medicalRecordRepository,
-            AnimalRepository animalRepository) {
-
+    public MedicalRecordController(MedicalRecordRepository medicalRecordRepository,
+                                   AnimalRepository animalRepository) {
         this.medicalRecordRepository = medicalRecordRepository;
         this.animalRepository = animalRepository;
     }
 
+    // FORM - NOVI PREGLED
     @GetMapping("/novi/{animalId}")
-    public String noviPregled(@PathVariable Long animalId,
-                              Model model) {
+    public String novi(@PathVariable Long animalId, Model model) {
 
         Animal animal = animalRepository.findById(animalId)
                 .orElseThrow();
 
-        MedicalRecord pregled = new MedicalRecord();
-        pregled.setAnimal(animal);
+        MedicalRecord m = new MedicalRecord();
+        m.setAnimal(animal);
 
-        model.addAttribute("pregled", pregled);
+        model.addAttribute("pregled", m);
 
         return "pregled-forma";
     }
@@ -45,5 +43,29 @@ public class MedicalRecordController {
 
         return "redirect:/zivotinje/" +
                 pregled.getAnimal().getId();
+    }
+
+    @GetMapping("/obrisi/{id}")
+    public String obrisi(@PathVariable Long id) {
+
+        MedicalRecord m = medicalRecordRepository.findById(id)
+                .orElseThrow();
+
+        Long animalId = m.getAnimal().getId();
+
+        medicalRecordRepository.deleteById(id);
+
+        return "redirect:/zivotinje/" + animalId;
+    }
+
+    @GetMapping("/uredi/{id}")
+    public String uredi(@PathVariable Long id, Model model) {
+
+        MedicalRecord m = medicalRecordRepository.findById(id)
+                .orElseThrow();
+
+        model.addAttribute("pregled", m);
+
+        return "pregled-forma";
     }
 }

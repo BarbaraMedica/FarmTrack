@@ -9,10 +9,12 @@
 <p>Markica: <span th:text="${zivotinja.brojMarkice}"></span></p>
 <p>Pasmina: <span th:text="${zivotinja.pasmina}"></span></p>
 <p>Status: <span th:text="${zivotinja.status}"></span></p>
-<a th:href="@{/pregledi/novi/{id}(id=${zivotinja.id})}">
-    Dodaj pregled
-</a>
+
 <h2>Medicinski zapisi</h2>
+
+<a th:href="@{/pregledi/novi/{id}(id=${zivotinja.id})}">
+    + Novi pregled
+</a>
 
 <table border="1">
     <tr>
@@ -20,6 +22,7 @@
         <th>Terapija</th>
         <th>Mlijeko</th>
         <th>Bilješke</th>
+        <th>Akcije</th>
     </tr>
 
     <tr th:each="m : ${zivotinja.medicinskiZapisi}">
@@ -27,6 +30,15 @@
         <td th:text="${m.terapija}"></td>
         <td th:text="${m.kolicinaMlijeka}"></td>
         <td th:text="${m.biljeske}"></td>
+
+        <td>
+            <a th:href="@{/pregledi/uredi/{id}(id=${m.id})}">Uredi</a>
+            |
+            <a th:href="@{/pregledi/obrisi/{id}(id=${m.id})}"
+               onclick="return confirm('Sigurno brisanje?')">
+                Obriši
+            </a>
+        </td>
     </tr>
 </table>
 </body>

@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Pregled</title>
+    <title>FarmTrack</title>
 </head>
 <body>
-<h1>FarmTrackDB</h1>
 
-<a href="/zivotinje">Pregled životinja</a>
+<h1>FarmTrack Dashboard</h1>
+
+<div>
+    <h2>Broj životinja</h2>
+    <p th:text="${brojZivotinja}"></p>
+</div>
+
+<div>
+    <h2>Broj pregleda</h2>
+    <p th:text="${brojPregleda}"></p>
+</div>
+
+<hr>
+
+<a href="/zivotinje">Životinje</a>
+
 </body>
 </html>
