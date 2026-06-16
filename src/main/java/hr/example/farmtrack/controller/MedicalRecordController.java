@@ -14,11 +14,21 @@ public class MedicalRecordController {
 
     private final MedicalRecordRepository medicalRecordRepository;
     private final AnimalRepository animalRepository;
+    
 
     public MedicalRecordController(MedicalRecordRepository medicalRecordRepository,
                                    AnimalRepository animalRepository) {
         this.medicalRecordRepository = medicalRecordRepository;
         this.animalRepository = animalRepository;
+    }
+    @GetMapping
+    public String sviPregledi(Model model) {
+
+        model.addAttribute(
+                "pregledi",
+                medicalRecordRepository.findAll());
+
+        return "pregledi";
     }
 
     // FORM - NOVI PREGLED

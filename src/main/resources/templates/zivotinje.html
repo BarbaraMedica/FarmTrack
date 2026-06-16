@@ -1,37 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+  <title>Životinje</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>Životinje</h1>
+<div th:replace="~{layout :: navbar}"></div>
 
-<a href="/zivotinje/nova">Dodaj životinju</a>
+<div class="container mt-4">
 
-<form action="/zivotinje">
-  <input name="search" placeholder="Pretraži po imenu">
-  <button>Traži</button>
-</form>
+  <h1 class="text-success">Životinje</h1>
 
-<table>
-  <tr>
-    <th>Ime</th>
-    <th>Markica</th>
-    <th>Pasmina</th>
-    <th>Zabilježeno</th>
-  </tr>
+  <!-- SEARCH -->
+  <form class="d-flex mb-3" method="get">
+    <input class="form-control me-2" name="search" placeholder="Pretraži ime...">
+    <button class="btn btn-success">Traži</button>
+  </form>
 
-  <tr th:each="z : ${zivotinje}">
-    <td th:text="${z.ime}"></td>
-    <td th:text="${z.brojMarkice}"></td>
-    <td th:text="${z.pasmina}"></td>
-    <td>
-      <a th:href="@{'/zivotinje/' + ${z.id}}">Detalji</a>
-      <a th:href="@{'/zivotinje/uredi/' + ${z.id}}">Uredi</a>
-      <a th:href="@{'/zivotinje/obrisi/' + ${z.id}}">Obriši</a>
-    </td>
-  </tr>
-</table>
+  <a class="btn btn-primary mb-3" href="/zivotinje/nova">+ Nova životinja</a>
+
+  <table class="table table-striped table-hover shadow">
+
+    <thead class="table-success">
+    <tr>
+      <th>Ime</th>
+      <th>Markica</th>
+      <th>Pasmina</th>
+      <th>Status</th>
+      <th>Akcije</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="z : ${zivotinje}">
+      <td th:text="${z.ime}"></td>
+      <td th:text="${z.brojMarkice}"></td>
+      <td th:text="${z.pasmina}"></td>
+      <td th:text="${z.status}"></td>
+
+      <td>
+        <a class="btn btn-sm btn-info"
+           th:href="@{/zivotinje/{id}(id=${z.id})}">
+          Detalji
+        </a>
+
+        <a class="btn btn-sm btn-warning"
+           th:href="@{/zivotinje/uredi/{id}(id=${z.id})}">
+          Uredi
+        </a>
+
+        <a class="btn btn-sm btn-danger"
+           onclick="return confirm('Obrisati životinju?')"
+           th:href="@{/zivotinje/obrisi/{id}(id=${z.id})}">
+          Obriši
+        </a>
+        <a th:href="@{/pregledi/novi/{id}(id=${z.id})}"
+           class="btn btn-success btn-sm">
+          Dodaj pregled
+        </a>
+      </td>
+
+    </tr>
+    </tbody>
+
+  </table>
+</div>
+  </div>
+
+
 </body>
 </html>

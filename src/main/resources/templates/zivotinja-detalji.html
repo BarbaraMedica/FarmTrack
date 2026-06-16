@@ -1,45 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <title>Detalji životinje</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1 th:text="${zivotinja.ime}"></h1>
 
-<p>Markica: <span th:text="${zivotinja.brojMarkice}"></span></p>
-<p>Pasmina: <span th:text="${zivotinja.pasmina}"></span></p>
-<p>Status: <span th:text="${zivotinja.status}"></span></p>
+<div th:replace="~{layout :: navbar}"></div>
 
-<h2>Medicinski zapisi</h2>
+        <div class="container mt-4">
 
-<a th:href="@{/pregledi/novi/{id}(id=${zivotinja.id})}">
-    + Novi pregled
-</a>
+            <!-- NASLOV -->
+            <h2 class="text-success mb-4">
+                 Karton životinje
+            </h2>
 
-<table border="1">
-    <tr>
-        <th>Datum</th>
-        <th>Terapija</th>
-        <th>Mlijeko</th>
-        <th>Bilješke</th>
-        <th>Akcije</th>
-    </tr>
+            <!-- GLAVNI KARTON -->
+            <div class="card border-success shadow-lg">
 
-    <tr th:each="m : ${zivotinja.medicinskiZapisi}">
-        <td th:text="${m.datumPregleda}"></td>
-        <td th:text="${m.terapija}"></td>
-        <td th:text="${m.kolicinaMlijeka}"></td>
-        <td th:text="${m.biljeske}"></td>
+                <div class="card-header bg-success text-white">
+                    <h4 th:text="${zivotinja.ime}"></h4>
+                </div>
 
-        <td>
-            <a th:href="@{/pregledi/uredi/{id}(id=${m.id})}">Uredi</a>
-            |
-            <a th:href="@{/pregledi/obrisi/{id}(id=${m.id})}"
-               onclick="return confirm('Sigurno brisanje?')">
-                Obriši
-            </a>
-        </td>
-    </tr>
-</table>
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <p><b>Broj markice:</b> <span th:text="${zivotinja.brojMarkice}"></span></p>
+                            <p><b>Pasmina:</b> <span th:text="${zivotinja.pasmina}"></span></p>
+                            <p><b>Spol:</b> <span th:text="${zivotinja.spol}"></span></p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <p><b>Datum rođenja:</b> <span th:text="${zivotinja.datumRodenja}"></span></p>
+                            <p>
+                                <b>Status:</b>
+                                <span class="badge bg-success"
+                                      th:text="${zivotinja.status}">
+                                </span>
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- AKCIJE -->
+            <div class="mt-4">
+
+                <a class="btn btn-success"
+                   th:href="@{'/zivotinje/uredi/' + ${zivotinja.id}}">
+                     Uredi
+                </a>
+
+                <a class="btn btn-danger"
+                   th:href="@{'/zivotinje/obrisi/' + ${zivotinja.id}}">
+                     Obriši
+                </a>
+
+                <a class="btn btn-outline-success"
+                   href="/zivotinje">
+                     Natrag
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 </body>
 </html>
