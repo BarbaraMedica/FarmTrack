@@ -35,8 +35,8 @@ public class AnimalController {
 
     @GetMapping("/{id}")
     public String detalji(@PathVariable Long id, Model model) {
-        model.addAttribute("zivotinja",
-                animalRepository.findById(id).orElseThrow());
+        Animal zivotinja = animalRepository.findById(id).orElseThrow();
+        model.addAttribute("zivotinja", zivotinja);
         return "zivotinja-detalji";
     }
 

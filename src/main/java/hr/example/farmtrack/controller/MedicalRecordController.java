@@ -49,10 +49,22 @@ public class MedicalRecordController {
     @PostMapping("/spremi")
     public String spremi(@ModelAttribute MedicalRecord pregled) {
 
+        // Ako animal nema ID ili je NULL, baca grešku
+        if (pregled.getAnimal() == null || pregled.getAnimal().getId() == null) {
+            throw new IllegalArgumentException("Životinja nije postavljena!");
+        }
+
+        // Učitaj cijeli animal objekat iz baze
+        Animal animal = animalRepository.findById(pregled.getAnimal().getId())
+                .orElseThrow(() -> new IllegalArgumentException("Životinja nije pronađena!"));
+
+        // Postavi kompletan animal objekat
+        pregled.setAnimal(animal);
+
+        // Sada spremi pregled sa punom životnjom
         medicalRecordRepository.save(pregled);
 
-        return "redirect:/zivotinje/" +
-                pregled.getAnimal().getId();
+        return "redirect:/zivotinje/" + animal.getId();
     }
 
     @GetMapping("/obrisi/{id}")

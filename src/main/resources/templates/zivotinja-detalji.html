@@ -61,11 +61,57 @@
                      Obriši
                 </a>
 
+                <a class="btn btn-info"
+                   th:href="@{'/pregledi/novi/' + ${zivotinja.id}}">
+                     Novi pregled
+                </a>
+
                 <a class="btn btn-outline-success"
                    href="/zivotinje">
                      Natrag
                 </a>
 
+            </div>
+
+            <!-- ZDRAVSTVENI KARTONI -->
+            <div class="mt-5">
+                <h3 class="text-success mb-3">Zdravstveni kartoni</h3>
+                
+                <div th:if="${zivotinja.medicinskiZapisi == null or zivotinja.medicinskiZapisi.isEmpty()}" 
+                     class="alert alert-info">
+                    Nema dostupnih pregleda. Dodaj prvi pregled klikom na "Novi pregled" gumb.
+                </div>
+
+                <table th:if="${zivotinja.medicinskiZapisi != null and !zivotinja.medicinskiZapisi.isEmpty()}"
+                       class="table table-bordered table-hover">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Datum</th>
+                            <th>Terapija</th>
+                            <th>Količina mlijeka</th>
+                            <th>Bilješke</th>
+                            <th>Akcije</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="pregled : ${zivotinja.medicinskiZapisi}">
+                            <td th:text="${pregled.datumPregleda}"></td>
+                            <td th:text="${pregled.terapija}"></td>
+                            <td th:text="${pregled.kolicinaMlijeka}"></td>
+                            <td th:text="${pregled.biljeske}"></td>
+                            <td>
+                                <a class="btn btn-sm btn-warning"
+                                   th:href="@{'/pregledi/uredi/' + ${pregled.id}}">
+                                    Uredi
+                                </a>
+                                <a class="btn btn-sm btn-danger"
+                                   th:href="@{'/pregledi/obrisi/' + ${pregled.id}}">
+                                    Obriši
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
         </div>

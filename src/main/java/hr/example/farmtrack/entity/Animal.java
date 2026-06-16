@@ -30,7 +30,8 @@ public class Animal {
 
     @OneToMany(mappedBy = "animal",
             cascade = CascadeType.ALL,
-            orphanRemoval = true)
+            orphanRemoval = true,
+            fetch = FetchType.EAGER)
     private List<MedicalRecord> medicinskiZapisi;
     // GET / SET
 
